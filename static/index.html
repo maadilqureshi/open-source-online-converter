@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Convert images, DOCX and PDF files with an open-source file converter.">
+<title>ConvertKit Open — File Converter</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head><body><main class="wrap">
+<header><a class="brand" href="/">◇ ConvertKit <span>Open</span></a><a class="github" href="https://github.com/maadilqureshi/open-source-online-converter" target="_blank" rel="noopener noreferrer">GitHub ↗</a></header>
+<section class="hero"><p class="tag">OPEN-SOURCE FILE UTILITIES</p><h1>Convert files.<br><em>Get things done.</em></h1>
+<p>Convert images, Word documents and PDFs from one simple interface. No account required.</p></section>
+<section class="panel"><div class="panel-head"><div><h2>Start a conversion</h2><p>Select a file to see supported output formats.</p></div><span class="pill">Max 15 MB</span></div>
+<form id="converter"><label class="drop" id="drop"><input id="file" type="file" accept=".jpg,.jpeg,.png,.webp,.bmp,.docx,.pdf" required>
+<span class="upload-icon">⇧</span><strong id="file-label">Choose a file or drop it here</strong><small>JPG, PNG, WebP, BMP, DOCX, PDF</small></label>
+<div class="row"><div><label for="target">Convert to</label><select id="target" disabled required><option value="">Choose a file first</option></select></div>
+<button id="submit" disabled type="submit">Convert file →</button></div><p id="status" role="status" aria-live="polite"></p></form></section>
+<section class="features"><h2>Supported conversions</h2><div class="cards">
+<article><div class="symbol">▧</div><h3>Images</h3><p>JPG, PNG, WebP and BMP conversions. Turn images into PDF documents.</p></article>
+<article><div class="symbol">▤</div><h3>Documents</h3><p>Convert DOCX to PDF using LibreOffice on the backend.</p></article>
+<article><div class="symbol">▣</div><h3>PDF tools</h3><p>Extract text into editable Word documents or download PDF pages as PNG images in a ZIP.</p></article>
+</div></section>
+<p class="notice"><strong>Important:</strong> PDF → DOCX only extracts digital text and may lose formatting. Scanned documents require OCR (not included). Avoid sensitive uploads on public deployments you do not trust.</p>
+<footer>MIT licensed • Backend processes files temporarily • No account required</footer>
+</main><script defer src="/assets/app.js"></script></body></html>
