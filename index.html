@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Free, private, browser-based JPG, PNG and WebP image converter.">
+<title>ConvertKit Open — Image Converter</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#091521;color:#eaf4f9}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 90% 0,#184055,transparent 44%),#091521}.wrap{max-width:1050px;margin:auto;padding:24px 20px 60px}header{display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{color:white;text-decoration:none;font-size:22px;font-weight:800}.brand span,.hero em{color:#5de0bc}header a:last-child,footer a{color:#bdd6e2}.hero{text-align:center;padding:68px 0 36px}.eyebrow{font-weight:800;letter-spacing:.19em;color:#60dcb5;font-size:12px}.hero h1{font-size:clamp(39px,7vw,72px);line-height:1.08;letter-spacing:-.055em;margin:12px 0}.hero em{font-style:normal}.hero p:last-child{color:#b2c8d7;line-height:1.7}.panel{border:1px solid #33546e;background:#102338;padding:clamp(18px,4vw,34px);border-radius:22px;box-shadow:0 25px 65px #0004}.panel-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.panel h2{margin:0 0 7px}.panel-top p{margin:0;color:#a9c3d0}.pill{color:#75e7c2;border:1px solid #257459;border-radius:24px;padding:8px 12px;font-size:12px}.drop{border:2px dashed #4c778d;background:#0b1b2c;border-radius:16px;min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;padding:20px;text-align:center;cursor:pointer;margin:26px 0}.drop.drag{border-color:#62e7c1;background:#10352f}.drop input{position:absolute;width:1px;height:1px;opacity:0}.drop:focus-within{outline:3px solid #eecf70}.drop strong{overflow-wrap:anywhere}.drop small{color:#a0bac8}.symbol{font-size:36px;color:#64dfb9}.fields{display:grid;grid-template-columns:1fr 1fr;gap:20px}label.caption{display:block;margin:0 0 10px;font-weight:650}select{width:100%;background:#091827;color:white;border:1px solid #496980;border-radius:10px;padding:12px;font:inherit}input[type=range]{width:100%;accent-color:#60dfba}.buttons{display:flex;gap:12px;margin:25px 0 12px}button{cursor:pointer;background:#60dfb8;border:0;border-radius:9px;padding:14px 22px;font:inherit;font-weight:750;color:#09271e}.secondary{background:#29435a;color:#f1f8fd}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,select:focus-visible{outline:3px solid #eecf70}#status{min-height:22px;color:#b3cdda}#status.error{color:#ffb4b4}#status.success{color:#7de9c6}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0}.grid article{border:1px solid #33516b;background:#102338;border-radius:14px;padding:20px}.grid h3{margin:0 0 10px}.grid p{color:#b0cad8;line-height:1.6;margin:0;font-size:14px}.notice{border:1px solid #365e73;padding:18px;border-radius:12px;color:#c3d8e3;line-height:1.6}footer{text-align:center;color:#91acbc;margin-top:38px;font-size:13px}@media(max-width:680px){.hero{padding:48px 0 30px}.fields,.grid{grid-template-columns:1fr}.buttons{flex-direction:column}.panel-top{align-items:start;flex-direction:column}}
+</style>
+</head>
+<body><main class="wrap"><header><a class="brand" href="./">◇ ConvertKit <span>Open</span></a><a href="https://github.com/maadilqureshi/open-source-online-converter" target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a></header>
+<section class="hero"><p class="eyebrow">FREE · OPEN SOURCE · PRIVATE</p><h1>Convert images.<br><em>Right in your browser.</em></h1><p>JPG, PNG and WebP. No account, no server upload — your image stays on your device.</p></section>
+<section class="panel"><div class="panel-top"><div><h2>Image converter</h2><p>Choose a file, select the format, and download.</p></div><span class="pill">Max 20 MB</span></div>
+<form id="form"><label class="drop" id="drop"><input id="file" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required><span class="symbol">⇧</span><strong id="name">Click to select or drop an image</strong><small>JPG · PNG · WebP</small></label>
+<div class="fields"><div><label class="caption" for="format">Convert to</label><select id="format"><option value="image/png">PNG (lossless)</option><option value="image/jpeg">JPG (smaller)</option><option value="image/webp">WebP (modern)</option></select></div><div><label class="caption" for="quality">JPG/WebP quality: <output id="quality-value">92%</output></label><input id="quality" type="range" min="30" max="100" value="92"></div></div><div class="buttons"><button id="convert" type="submit" disabled>Convert & download →</button><button class="secondary" id="reset" type="button">Clear</button></div><p id="status" role="status" aria-live="polite">Choose a file to begin.</p></form></section>
+<section class="grid"><article><h3>JPG → PNG</h3><p>Convert your JPEG images to PNG.</p></article><article><h3>PNG → JPG</h3><p>Convert PNG to JPG. Transparent regions become white.</p></article><article><h3>JPG/PNG ↔ WebP</h3><p>Convert modern web image formats in your browser.</p></article></section>
+<p class="notice"><strong>Note:</strong> This free GitHub Pages version supports still images only. Word → PDF and PDF → Word require the separate Python backend in this repository. Animated WebP is not supported; only the decoded frame is exported.</p>
+<footer>MIT licensed · No server upload · <a href="https://github.com/maadilqureshi/open-source-online-converter">Contribute on GitHub</a></footer></main>
+<script>
+'use strict';
+const fileEl=document.querySelector('#file'), formatEl=document.querySelector('#format'), button=document.querySelector('#convert'), nameEl=document.querySelector('#name'), statusEl=document.querySelector('#status'), drop=document.querySelector('#drop'), quality=document.querySelector('#quality');
+const allowed=new Set(['image/jpeg','image/png','image/webp']);
+const maxSize=20*1024*1024;
+function msg(text,type=''){statusEl.textContent=text;statusEl.className=type;}
+function update(){const f=fileEl.files?.[0];nameEl.textContent=f?f.name:'Click to select or drop an image';const good=!!f&&allowed.has(f.type)&&f.size<=maxSize&&f.size>0;button.disabled=!good;if(f&&!allowed.has(f.type))msg('Please choose a JPG, PNG, or WebP image.','error');else if(f&&f.size>maxSize)msg('Maximum file size is 20 MB.','error');else if(f&&f.size===0)msg('The selected file is empty.','error');else msg(f?'Ready to convert.':'Choose a file to begin.');}
+fileEl.addEventListener('change',update);
+quality.addEventListener('input',()=>document.querySelector('#quality-value').value=quality.value+'%');
+for(const eventName of ['dragenter','dragover'])drop.addEventListener(eventName,event=>{event.preventDefault();drop.classList.add('drag');});
+for(const eventName of ['dragleave','drop'])drop.addEventListener(eventName,event=>{event.preventDefault();drop.classList.remove('drag');});
+drop.addEventListener('drop',event=>{const f=event.dataTransfer.files?.[0];if(f){try{const transfer=new DataTransfer();transfer.items.add(f);fileEl.files=transfer.files;update();}catch{msg('Please select the image using the file picker.','error');}}});
+document.querySelector('#reset').addEventListener('click',()=>{fileEl.value='';update();});
+document.querySelector('#form').addEventListener('submit',async event=>{
+event.preventDefault();const f=fileEl.files?.[0];if(!f||!allowed.has(f.type)||f.size>maxSize)return;
+button.disabled=true;msg('Converting…');
+let url=null,bitmap=null;
+try{
+url=URL.createObjectURL(f);
+bitmap=await createImageBitmap(f,{imageOrientation:'from-image'});
+if(bitmap.width*bitmap.height>45000000)throw new Error('Image is too large to process (45 megapixels maximum).');
+const canvas=document.createElement('canvas');canvas.width=bitmap.width;canvas.height=bitmap.height;
+const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas is unavailable in your browser.');
+if(formatEl.value==='image/jpeg'){ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);}
+ctx.drawImage(bitmap,0,0);
+const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Your browser cannot encode this image format.')),formatEl.value,Number(quality.value)/100));
+const ext={'image/png':'png','image/jpeg':'jpg','image/webp':'webp'}[formatEl.value];
+const base=f.name.replace(/\.[^.]+$/,'').replace(/[^a-zA-Z0-9_-]/g,'-').slice(0,90)||'converted';
+const link=document.createElement('a');const outputURL=URL.createObjectURL(blob);link.href=outputURL;link.download=base+'-converted.'+ext;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(outputURL),30000);
+msg('Conversion completed. Your download should start now.','success');
+}catch(error){msg('Could not convert image: '+error.message,'error');}
+finally{bitmap?.close();if(url)URL.revokeObjectURL(url);button.disabled=false;}
+});
+</script></body></html>
